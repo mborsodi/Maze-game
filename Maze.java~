@@ -4,14 +4,9 @@ import java.lang.Math;
 public class Maze
 {
   
-  private static Player one;
-  private static boolean game;
-  
   public static void main(String[] args)
   {
     Scanner scan = new Scanner(System.in);
-    
-    //creating the rooms of the maze
     Room dungeon = new Room("Dungeon", false, true, false);
     Room jungle = new Room("Jungle", false, false, false);
     Room dragon = new Room("Dragon's lair", true, false, true);
@@ -29,19 +24,17 @@ public class Maze
     dungeon.setEast(dragon);
     hallway.setEast(vault);
     
-    //introducing game
     System.out.println("What is your name?");
     
-    one = new Player(scan.nextLine());
+    Player one = new Player(scan.nextLine());
     
     System.out.println("Hi " + one.name + "! Find and kill the dragon to complete the game. Try not to die on the way!");
     System.out.println("Commands:\nnorth - go north\nsouth - go south\neast - go east\nwest - go west\npoints - show current points\nroom - current position\nlook - look for gold coin\nget - get gold coin\nkill - kill dragon or other creatures");
     
     one.currentRoom(jungle);
     
-    game = true;
+    boolean game = true;
     
-    //what happens for each command
     while (game)
     {
       if (one.healthPoints <= 0)
@@ -154,49 +147,4 @@ public class Maze
       }
     }
   }
-  
-  
-  //seperate method for the troll's riddles 
-  public static void riddles()
-  {
-    Scanner scan = new Scanner(System.in);
-    
-    System.out.println("To get past the troll to the Holy Grail, you have to answer his riddles! Good Luck!");
-    System.out.println("Troll: 'What is your name?'");
-    
-    if (scan.nextLine().equals(one.name))
-    {
-      System.out.println("Troll: 'Correct!'");
-    }
-    else
-    {
-      System.out.println("Troll: 'That is wrong! You will be thrown into the Gorge of Eternal Peril!'\nGame over! You lose!");
-      game = false;
-      return;
-    }
-    
-    System.out.println("Troll: 'What is your quest?'");
-    scan.nextLine();
-    System.out.println("Troll: 'Correct!'");
-    
-    System.out.println("Troll: 'What is the air speed velocity of an unladen swallow?'");
-    String thing = scan.nextLine();
-    
-    if (thing.toLowerCase().contains("european") && thing.toLowerCase().contains("european"))
-    {
-      System.out.println("Troll: 'What? I don't know that!'\nThe troll gets thrown in the Gorge of Eternal Peril!\nTroll: 'AhhhhH!!!!!!!'\nCongratulations! You completed the riddles! You have found the Holy Grail!");  
-      one.healthPoints += 50;
-      System.out.println("You now have " + one.healthPoints + " health points!");
-    }
-    else
-    {
-      System.out.println("Troll: 'That is wrong! You will be thrown into the Gorge of Eternal Peril!'\nGame over! You lose!");
-      game = false;
-      return;
-    }
-  }
-  
-  
-  
-  
 }
